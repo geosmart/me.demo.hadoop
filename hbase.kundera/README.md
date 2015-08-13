@@ -1,0 +1,1 @@
+以spring data for hadoop对hbase进行CRUD的示例
