@@ -1,37 +1,38 @@
 package me.demo.hadoop.hbase.springdata.entity;
 
+import org.apache.hadoop.hbase.util.Bytes;
+
 /**
- * 用户 Entity
+ * UserDetail Entity
  * 
  * @author geosmart
  */
 public class UserDetail {
-	private String name;
-	private String email;
-	private String password;
+	public static String CF_KEY = "detail";
+	public static byte[] CF_KEY_BYTES = Bytes.toBytes(CF_KEY);
 
-	public UserDetail(String name, String email, String password) {
+	private String address;
+	private String photo;
+
+	public UserDetail(String address, String photo) {
 		super();
-		this.name = name;
-		this.email = email;
-		this.password = password;
+		this.address = address;
+		this.photo = photo;
 	}
 
-	public String getName() {
-		return name;
+	public String getAddress() {
+		return address;
 	}
 
-	public String getEmail() {
-		return email;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPhoto() {
+		return photo;
 	}
 
-	@Override
-	public String toString() {
-		return "User [name=" + name + ", email=" + email + ", password=" + password + "]";
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
-
 }

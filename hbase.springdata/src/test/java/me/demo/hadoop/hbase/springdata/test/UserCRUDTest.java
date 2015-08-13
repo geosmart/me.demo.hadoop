@@ -34,9 +34,9 @@ public class UserCRUDTest {
 
 	@Test
 	public void hbaseTest() throws IOException {
-		// userService.initialize();
+		userService.initialize();
 		userService.addUsers();
-		List<User> users = userDao.findAll();
+		List<User> users = userDao.list();
 		log.debug("Number of users ={}", users.size());
 		System.out.println(users);
 	}
