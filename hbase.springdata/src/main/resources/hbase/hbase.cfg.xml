@@ -5,11 +5,24 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd">
-	<description>spring integration</description>
+	<description>hbase config</description>
+ 
+	<!-- hBaseAdmin config -->
+	<bean id="hBaseAdmin" class="org.apache.hadoop.hbase.client.HBaseAdmin">
+		<constructor-arg>
+			<ref bean="hbaseConfig" />
+		</constructor-arg>
+	</bean>
+	
+	<!-- hbase config -->
+	<hdp:hbase-configuration id="hbaseConfig"
+		configuration-ref="hadoopConfig" zk-quorum="192.168.1.100" zk-port="2181">
+	</hdp:hbase-configuration>
 
-	<context:component-scan base-package="me.demo.hadoop.hbase.springdata" />
+	<!--hadoop: hdfs NameNode config -->
+	<hdp:configuration id="hadoopConfig">
+		fs.defaultFS=hdfs://192.168.1.100:8020
+	</hdp:configuration>
 
-	<import resource="spring/service.cfg.xml" />
-	<import resource="spring/dao.cfg.xml" />
-	<import resource="hbase/hbase.cfg.xml" />
+
 </beans>

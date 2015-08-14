@@ -8,12 +8,13 @@
  */
 package me.demo.hadoop.hbase.springdata.test;
 
+import hbase.springdata.dao.IUserDao;
+import hbase.springdata.entity.User;
+import hbase.springdata.service.IUserService;
+import hbase.springdata.util.JsonUtil;
+
 import java.io.IOException;
 import java.util.List;
-
-import me.demo.hadoop.hbase.springdata.dao.UserDao;
-import me.demo.hadoop.hbase.springdata.entity.User;
-import me.demo.hadoop.hbase.springdata.service.UserService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,16 +29,34 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UserCRUDTest {
 	private static Logger log = LoggerFactory.getLogger(UserCRUDTest.class);
 	@Autowired
-	UserService userService;
+	IUserService userService;
 	@Autowired
-	UserDao userDao;
+	IUserDao userDao;
 
 	@Test
-	public void hbaseTest() throws IOException {
-		userService.initialize();
-		userService.addUsers();
-		List<User> users = userDao.list();
-		log.debug("Number of users ={}", users.size());
-		System.out.println(users);
+	public void initializeTableTest() {
+		// userService.initialize();
+	}
+
+	@Test
+	public void saveTest() {
+		// userService.addUsers();
+	}
+
+	@Test
+	public void deleteRowTest() {
+		userDao.deleteRow(User.TB_NAME, "0caf7a87-8208-4809-a402-664af8653921");
+	}
+
+	@Test
+	public void identifyTest() {
+		User user = userService.identify("0b395e30-45f7-4252-9945-7094a485beb9");
+		System.err.println(JsonUtil.convertObject2String(user));
+	}
+
+	@Test
+	public void queryTest() throws IOException {
+		List<User> userList = userDao.find("0b395e30-45f7-4252-9945-7094a485beb9", 10);
+		System.err.println(JsonUtil.convertObject2String(userList));
 	}
 }

@@ -5,11 +5,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd">
-	<description>spring integration</description>
-
-	<context:component-scan base-package="me.demo.hadoop.hbase.springdata" />
-
-	<import resource="spring/service.cfg.xml" />
-	<import resource="spring/dao.cfg.xml" />
-	<import resource="hbase/hbase.cfg.xml" />
+   <description>dao config</description>
+   
+	<bean id="userService" class="hbase.springdata.service.impl.UserServiceImpl" >
+		<property name="userDao" ref="userDao" /> 
+	</bean>  
 </beans>

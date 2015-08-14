@@ -1,4 +1,4 @@
-package me.demo.hadoop.hbase.springdata.entity;
+package hbase.springdata.entity;
 
 import org.apache.hadoop.hbase.util.Bytes;
 
@@ -13,6 +13,10 @@ public class UserDetail {
 
 	private String address;
 	private String photo;
+
+	public UserDetail() {
+		super();
+	}
 
 	public UserDetail(String address, String photo) {
 		super();

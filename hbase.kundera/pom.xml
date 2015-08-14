@@ -16,8 +16,7 @@
 	</developers>
 
 	<description>hbase.kundera示例</description>
-
-	<!-- 项目属性 -->
+ 
 	<properties>
 		<jdk.version>1.7</jdk.version>
 		<spring.version>3.1.2.RELEASE</spring.version>
@@ -25,9 +24,7 @@
 		<hadoop.version>2.2.0</hadoop.version>
 		<hbase.version>0.96.1.1-hadoop2</hbase.version>
 		<kundera-hbase.version>3.0</kundera-hbase.version>
-
-		<commons-lang3.version>3.1</commons-lang3.version>
-		<commons-io.version>2.4</commons-io.version>
+ 
 		<slf4j.version>1.6.6</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 		<junit.version>4.11</junit.version>
@@ -55,7 +52,7 @@
 	</repositories>
 
 	<dependencies>
-		<!-- Spring dependencies -->
+		<!-- Spring-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -107,13 +104,7 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.impetus.kundera.client</groupId>
-			<artifactId>kundera-hbase</artifactId>
-			<version>${kundera-hbase.version}</version>
-		</dependency>
-
-
+		<!-- Hadoop  -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-common</artifactId>
@@ -138,7 +129,13 @@
 			</exclusions>
 		</dependency>
 
-		<!-- LOGGING begin -->
+		<dependency>
+			<groupId>com.impetus.kundera.client</groupId>
+			<artifactId>kundera-hbase</artifactId>
+			<version>${kundera-hbase.version}</version>
+		</dependency>
+ 
+		<!-- LOGGING  -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -159,9 +156,8 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-		<!-- LOGGING end -->
 
-		<!-- TEST begin -->
+		<!-- TEST  -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

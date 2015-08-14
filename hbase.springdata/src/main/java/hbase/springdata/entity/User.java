@@ -1,4 +1,4 @@
-package me.demo.hadoop.hbase.springdata.entity;
+package hbase.springdata.entity;
 
 import java.util.UUID;
 
@@ -11,8 +11,13 @@ import org.apache.hadoop.hbase.util.Bytes;
  */
 public class User {
 	public static final String TB_NAME = "User";
+	public static byte[] TB_NAME_BYTES = Bytes.toBytes(TB_NAME);
+
 	public static String CF_KEY = "user";
 	public static byte[] CF_KEY_BYTES = Bytes.toBytes(CF_KEY);
+
+	// cfkeys：without default cfkey
+	public static String[] CF_KEYS = new String[] { CF_KEY, "detail" };
 
 	private String id;
 	private String name;
@@ -34,6 +39,10 @@ public class User {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+	}
+
+	public User() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {

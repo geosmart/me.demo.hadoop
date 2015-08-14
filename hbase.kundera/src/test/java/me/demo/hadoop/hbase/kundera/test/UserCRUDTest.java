@@ -31,5 +31,4 @@ public class UserCRUDTest {
 		// userService.initialize();
 		userService.addUsers();
 	}
-
 }

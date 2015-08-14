@@ -29,6 +29,7 @@
 		<jongo.version>1.1</jongo.version>
 		<kundera-hbase.version>2.9.1</kundera-hbase.version>
 
+		<jackson.version>2.4.1</jackson.version>
 		<guava.version>12.0</guava.version>
 		<commons-lang3.version>3.1</commons-lang3.version>
 		<httpclient.version>4.3.1</httpclient.version>
@@ -135,6 +136,23 @@
 			</exclusions>
 		</dependency> 
 
+		<!-- Jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		
 		<!-- LOGGING begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
