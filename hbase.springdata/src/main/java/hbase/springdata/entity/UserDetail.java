@@ -1,16 +1,11 @@
 package hbase.springdata.entity;
 
-import org.apache.hadoop.hbase.util.Bytes;
-
 /**
  * UserDetail Entity
  * 
  * @author geosmart
  */
 public class UserDetail {
-	public static String CF_KEY = "detail";
-	public static byte[] CF_KEY_BYTES = Bytes.toBytes(CF_KEY);
-
 	private String address;
 	private String photo;
 

@@ -3,12 +3,8 @@ package hbase.springdata.dao.impl;
 import hbase.springdata.dao.IUserDao;
 import hbase.springdata.dao.common.impl.BaseHbaseDaoImpl;
 import hbase.springdata.entity.User;
-import hbase.springdata.entity.UserDetail;
-import hbase.springdata.util.JsonUtil;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.hbase.client.HTableInterface;
@@ -30,9 +26,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
  * @author geosmart
  */
 public class UserDaoImpl extends BaseHbaseDaoImpl<User> implements IUserDao {
+	// TODO 初始化Dao时，默认加载User属性
+	User u = new User();
 	// TODO　need to extract to BaseHbaseDao,how?
 	TypeReference<User> type = new TypeReference<User>() {
 	};
+
+	@Override
+	public void initTable() {
+		initTable(User.TB_NAME, u.getEmberdCfKeys());
+	}
 
 	@Override
 	public User identify(String rowKey) {
@@ -66,37 +69,19 @@ public class UserDaoImpl extends BaseHbaseDaoImpl<User> implements IUserDao {
 	}
 
 	@Override
-	public User save(final User user) {
-		return execute(User.TB_NAME, new TableCallback<User>() {
+	public User save(final User pojo) {
+		User result = execute(User.TB_NAME, new TableCallback<User>() {
 			@Override
 			public User doInTable(HTableInterface table) throws Throwable {
-				Put pUser = new Put(Bytes.toBytes(user.getId()));
-				Map<String, Object> userMap = JsonUtil.convertEntityObj2Map(user, false);
-				Iterator<String> itUser = userMap.keySet().iterator();
-				while (itUser.hasNext()) {
-					String key = itUser.next();
-					Object value = userMap.get(key);
-					if (!(value instanceof Map)) {
-						pUser.add(User.CF_KEY_BYTES, Bytes.toBytes(key),
-								Bytes.toBytes(value.toString()));
-					}
-				}
-				table.put(pUser);
+				String rowKeyColumn = u.getRowKeyColumnName();
 
-				Put pDetail = new Put(Bytes.toBytes(user.getId()));
-				Map<String, Object> userDetailMap = JsonUtil.convertEntityObj2Map(user.getDetail(),
-						false);
-				Iterator<String> itUserDetail = userDetailMap.keySet().iterator();
-				while (itUserDetail.hasNext()) {
-					String key = itUserDetail.next();
-					Object value = userDetailMap.get(key);
-					pDetail.add(UserDetail.CF_KEY_BYTES, Bytes.toBytes(key),
-							Bytes.toBytes(value.toString()));
-				}
-				table.put(pDetail);
-				return user;
+				List<Put> puts = generatePuts(pojo, rowKeyColumn, User.CF_KEY_BYTES);
+
+				table.put(puts);
+				return pojo;
 			}
 		});
+		return result;
 	}
 
 	public TypeReference<User> getType() {

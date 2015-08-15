@@ -35,12 +35,19 @@ public class UserCRUDTest {
 
 	@Test
 	public void initializeTableTest() {
-		// userService.initialize();
+		// userDao.initTable();
+	}
+
+	@Test
+	public void dropTableTest() {
+		userDao.dropTable(User.TB_NAME);
 	}
 
 	@Test
 	public void saveTest() {
-		// userService.addUsers();
+		userDao.dropTable(User.TB_NAME);
+		userDao.initTable();
+		userService.addUsers();
 	}
 
 	@Test
@@ -51,12 +58,12 @@ public class UserCRUDTest {
 	@Test
 	public void identifyTest() {
 		User user = userService.identify("0b395e30-45f7-4252-9945-7094a485beb9");
-		System.err.println(JsonUtil.convertObject2String(user));
+		System.err.println(JsonUtil.convertObject2String(user, false));
 	}
 
 	@Test
 	public void queryTest() throws IOException {
 		List<User> userList = userDao.find("0b395e30-45f7-4252-9945-7094a485beb9", 10);
-		System.err.println(JsonUtil.convertObject2String(userList));
+		System.err.println(JsonUtil.convertObject2String(userList, true));
 	}
 }

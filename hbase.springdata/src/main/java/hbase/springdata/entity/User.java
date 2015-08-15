@@ -2,28 +2,27 @@ package hbase.springdata.entity;
 
 import java.util.UUID;
 
-import org.apache.hadoop.hbase.util.Bytes;
+import javax.persistence.Embedded;
+import javax.persistence.Id;
 
 /**
  * User- Entity
  * 
  * @author geosmart
  */
-public class User {
-	public static final String TB_NAME = "User";
-	public static byte[] TB_NAME_BYTES = Bytes.toBytes(TB_NAME);
-
-	public static String CF_KEY = "user";
-	public static byte[] CF_KEY_BYTES = Bytes.toBytes(CF_KEY);
-
-	// cfkeys：without default cfkey
-	public static String[] CF_KEYS = new String[] { CF_KEY, "detail" };
-
+public class User extends CommonEntity<User> {
+	@Id
 	private String id;
 	private String name;
 	private String email;
 	private String password;
+	@Embedded
 	private UserDetail detail;
+
+	public User() {
+		super();
+		detail = new UserDetail();
+	}
 
 	public User(String id, String name, String email, String password) {
 		super();
@@ -39,10 +38,6 @@ public class User {
 		this.name = name;
 		this.email = email;
 		this.password = password;
-	}
-
-	public User() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {
@@ -77,32 +72,12 @@ public class User {
 		this.password = password;
 	}
 
-	public static String getCF_KEY() {
-		return CF_KEY;
-	}
-
-	public static void setCF_KEY(String cF_KEY) {
-		CF_KEY = cF_KEY;
-	}
-
-	public static byte[] getCF_KEY_BYTES() {
-		return CF_KEY_BYTES;
-	}
-
-	public static void setCF_KEY_BYTES(byte[] cF_KEY_BYTES) {
-		CF_KEY_BYTES = cF_KEY_BYTES;
-	}
-
 	public UserDetail getDetail() {
 		return detail;
 	}
 
 	public void setDetail(UserDetail detail) {
 		this.detail = detail;
-	}
-
-	public static String getTbName() {
-		return TB_NAME;
 	}
 
 }

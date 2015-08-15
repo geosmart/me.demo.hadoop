@@ -11,8 +11,6 @@ public interface IUserService {
 
 	User identify(String rowKey);
 
-	void initialize();
-
 	void addUsers();
 
 }

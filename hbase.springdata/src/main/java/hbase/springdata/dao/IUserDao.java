@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface IUserDao extends IBaseHbaseDao<User> {
 
+	void initTable();
+
 	/**
 	 * query param
 	 * 
@@ -21,6 +23,12 @@ public interface IUserDao extends IBaseHbaseDao<User> {
 	 */
 	List<User> find(String startRow, long pageSize);
 
+	/**
+	 * identify a row
+	 * 
+	 * @param rowKey
+	 * @return
+	 */
 	User identify(String rowKey);
 
 	/**

@@ -25,6 +25,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.deser.Deserializers.Base;
+import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 
 /**
  * JsonUtil辅助类
@@ -587,14 +590,22 @@ public class JsonUtil {
 	public static String convertObject2String(Object object, boolean isUserAnnotations) {
 		String formData = null;
 		try {
-			ObjectMapper objectMapper = JsonUtil.getObjectMapperWithNull();
+			ObjectMapper mapper = JsonUtil.getObjectMapperWithNull();
 			// 禁用注释，如jsonIgnore
-			objectMapper.configure(MapperFeature.USE_ANNOTATIONS, isUserAnnotations);
-			formData = objectMapper.writeValueAsString(object);
+			// mapper.configure(MapperFeature.USE_ANNOTATIONS, isUserAnnotations);
+			mapper.setAnnotationIntrospector(new IgnoreInheritedIntrospector());
+			formData = mapper.writeValueAsString(object);
 		} catch (Exception e) {
 			log.error(e.toString());
 		}
 		return formData;
+	}
+
+	private static class IgnoreInheritedIntrospector extends JacksonAnnotationIntrospector {
+		@Override
+		public boolean hasIgnoreMarker(final AnnotatedMember m) {
+			return m.getDeclaringClass() == Base.class || super.hasIgnoreMarker(m);
+		}
 	}
 
 	/**
