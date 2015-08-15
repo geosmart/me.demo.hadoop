@@ -26,8 +26,7 @@
 		<hadoop.version>2.6.0</hadoop.version>
 
 		<morphia.version>0.108</morphia.version>
-		<jongo.version>1.1</jongo.version>
-		<kundera-hbase.version>2.9.1</kundera-hbase.version>
+		<jongo.version>1.1</jongo.version> 
 
 		<jackson.version>2.4.1</jackson.version>
 		<guava.version>12.0</guava.version>

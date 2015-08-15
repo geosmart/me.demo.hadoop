@@ -20,11 +20,12 @@
 	<properties>
 		<jdk.version>1.7</jdk.version>
 		<spring.version>3.1.2.RELEASE</spring.version>
-
-		<hadoop.version>2.2.0</hadoop.version>
-		<hbase.version>0.96.1.1-hadoop2</hbase.version>
-		<kundera-hbase.version>3.0</kundera-hbase.version>
  
+		
+        <hadoop.version>2.2.0</hadoop.version>
+        <kundera-hbase.version>3.0</kundera-hbase.version>
+		
+		 
 		<slf4j.version>1.6.6</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 		<junit.version>4.11</junit.version>
@@ -104,36 +105,14 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-		<!-- Hadoop  -->
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-common</artifactId>
-			<version>${hadoop.version}</version>
-			<scope>compile</scope>
-		</dependency>
+		<!-- Hadoop  --> 
+ 
+        <dependency>
+            <groupId>com.impetus.kundera.client</groupId>
+            <artifactId>kundera-hbase-v2</artifactId>
+            <version>${kundera-hbase.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.apache.hbase</groupId>
-			<artifactId>hbase-client</artifactId>
-			<version>${hbase.version}</version>
-			<scope>compile</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>com.impetus.kundera.client</groupId>
-			<artifactId>kundera-hbase</artifactId>
-			<version>${kundera-hbase.version}</version>
-		</dependency>
  
 		<!-- LOGGING  -->
 		<dependency>
